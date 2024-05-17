@@ -1,7 +1,31 @@
 package main
 
-import "fmt"
+import (
+	"html/template"
+	"log"
+	"net/http"
+)
+
+var tmpl = template.Must(template.ParseFiles("index.html"))
+var dataTmpl = template.Must(template.New("data").Parse(`<p>server!</p>`))
+
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	if err := tmpl.Execute(w, nil); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func dataHandler(w http.ResponseWriter, r *http.Request) {
+	if err := dataTmpl.Execute(w, nil); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
 
 func main() {
-	fmt.Println("Getting Started")
+	http.HandleFunc("/", indexHandler)
+	http.HandleFunc("/data", dataHandler)
+	log.Println("Starting server on port :8080")
+	if err := http.ListenAndServe(":8080", nil); err != nil {
+		log.Fatal(err)
+	}
 }
