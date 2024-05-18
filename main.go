@@ -7,7 +7,7 @@ import (
 )
 
 var tmpl = template.Must(template.ParseFiles("index.html"))
-var dataTmpl = template.Must(template.New("data").Parse(`<p>server!</p>`))
+var dataTmpl = template.Must(template.New("data").Parse(`<p>See I told you!</p>`))
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	if err := tmpl.Execute(w, nil); err != nil {

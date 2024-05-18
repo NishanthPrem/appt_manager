@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Appointment Manager</title>
-    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
 </head>
 <body>
     <h1>Welcome to my Appoinment Manager app using HTMX with Go!</h1>
     <button hx-get="/data" hx-trigger="click" hx-target="#result">Click me</button>
-    <div id="result">Hello</div>
+    <div id="result"><br>This sentence gets replaced when you click the button</div>
 </body>
 </html>
