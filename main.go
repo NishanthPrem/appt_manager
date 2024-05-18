@@ -24,7 +24,8 @@ func dataHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/data", dataHandler)
-	log.Println("Starting server on port :8080")
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	log.Println("Starting server on port localhost:8080")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal(err)
 	}
